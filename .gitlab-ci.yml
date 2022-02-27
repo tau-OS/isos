@@ -13,9 +13,10 @@ build_desktop:
     - wget -qO- https://tauos.co/gpg.asc | ostree remote gpg-import --repo repo --stdin tau 
     - until ostree pull --repo repo tau tau/core/1/x86_64; do echo "Try again"; done
     - git clone https://pagure.io/fedora-lorax-templates.git
-    - lorax --product=tauOS \
+    - |
+      lorax --product=tauOS \
       --version=1 \
-      --release=prerelease \
+      --release=1 \
       --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/x86_64/os/ \
       --source=https://repo.tauos.co/releases/1/ \
       --installpkgs=tau-logos \
