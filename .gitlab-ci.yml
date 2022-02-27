@@ -10,7 +10,7 @@ build_netinstall:
     - dnf install -y lorax wget
     - wget https://download.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-netinst-x86_64-35-1.2.iso -O base.iso
     - wget https://tauos.co/kickstart/desktop-x86_64.cfg -O desktop-x86_64.cfg
-    - sudo mkksiso desktop-x86_64.cfg base.iso netisnt.iso
+    - sudo mkksiso --debug desktop-x86_64.cfg base.iso netisnt.iso
   artifacts:
     paths:
       - netinst.iso
