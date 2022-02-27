@@ -2,18 +2,44 @@ stages:
   - build
   - release
 
-build_netinstall:
+build_desktop:
   stage: build
   tags:
     - privileged
   script:
-    - dnf install -y lorax wget generic-logos
-    - wget https://download.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-netinst-x86_64-35-1.2.iso -O base.iso
-    - wget https://tauos.co/kickstart/desktop-x86_64.cfg -O desktop-x86_64.cfg
-    - sudo mkksiso --debug desktop-x86_64.cfg base.iso netinst.iso
+    - dnf install -y lorax wget rpm-ostree
+    - ostree init --repo repo --mode archive
+    - ostree remote add tau https://ostree.tau.innatical.com tau/core/1/x86_64
+    - wget -qO- https://tauos.co/gpg.asc | ostree remote gpg-import --repo repo --stdin tau 
+    - ostree pull --repo repo tau
+    - git clone https://pagure.io/fedora-lorax-templates.git
+    - lorax --product=tauOS \
+      --version=1 \
+      --release=prerelease \
+      --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/x86_64/os/ \
+      --source=https://repo.tauos.co/releases/1/ \
+      --installpkgs=tau-logos \
+      --installpkgs=tau-release \
+      --variant=Desktop \
+      --volid=tauOS-Desktop-Installer \
+      --macboot \
+      --skip-branding \
+      --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-configure-repo.tmpl \
+      --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-embed-repo.tmpl \
+      --add-template-var=ostree_install_repo=file://$(pwd)/repo \
+      --add-template-var=ostree_update_repo=file://$(pwd)/repo \
+      --add-template-var=ostree_osname=tauOS \
+      --add-template-var=ostree_oskey=tauOS-desktop \
+      --add-template-var=ostree_contenturl=https://ostree.tau.innatical.com \
+      --add-template-var=ostree_install_ref=tau/core/1/x86_64 \
+      --add-template-var=ostree_update_ref=tau/core/1/x86_64 \
+      --logfile=$(pwd)/lorax.log \
+      --tmp=$(pwd)/tmp \
+      --rootfs-size=8 \
+      $(pwd)/desktop_x86_64
   artifacts:
     paths:
-      - netinst.iso
+      - desktop_x86_64
 
 release_all:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
@@ -31,7 +57,7 @@ release_all:
     tag_name: '$CI_COMMIT_SHORT_SHA'
     assets:
       links:
-        - name: 'x86 Desktop Netinstall'
-          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/file/netinst.iso'
+        - name: 'Desktop Installer (x86_64)'
+          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/file/desktop_x86_64'
   only:
     - main
