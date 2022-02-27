@@ -7,7 +7,7 @@ build_netinstall:
   tags:
     - privileged
   script:
-    - dnf install -y lorax wget
+    - dnf install -y lorax wget generic-logos
     - wget https://download.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-netinst-x86_64-35-1.2.iso -O base.iso
     - wget https://tauos.co/kickstart/desktop-x86_64.cfg -O desktop-x86_64.cfg
     - sudo mkksiso --debug desktop-x86_64.cfg base.iso netisnt.iso
