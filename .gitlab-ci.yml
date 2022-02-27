@@ -1,0 +1,31 @@
+stages:
+  - build
+  - release
+
+build-netinstall:
+  stage: build
+  script:
+    - dnf install -y lorax
+    - wget https://download.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-netinst-x86_64-35-1.2.iso -O base.iso
+    - wget https://tauos.co/kickstart/desktop-x86_64.cfg -O desktop-x86_64.cfg
+    - mkksiso desktop-x86_64.cfg base.iso netisnt.iso
+  artifacts:
+    paths:
+      - netinst.iso
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: build-netinstall
+      artifacts: true
+  release:
+    name: 'Release Images $CI_COMMIT_SHORT_SHA'
+    description: '$CI_COMMIT_MESSAGE'
+    tag_name: '$CI_COMMIT_SHORT_SHA'
+    assets:
+      links:
+        - name: 'x86 Desktop Netinstall'
+          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/file/netinst.iso'
+  only:
+    - main
