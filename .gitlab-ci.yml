@@ -2,7 +2,7 @@ stages:
   - build
   - release
 
-build-netinstall:
+build_netinstall:
   stage: build
   script:
     - dnf install -y lorax
@@ -13,11 +13,15 @@ build-netinstall:
     paths:
       - netinst.iso
 
-release-all:
-  stage: release
+release_all:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
+  stage: release
+  script:
+    - echo 'running release_job'
+    - echo 'Previous Job ID is printed below'
+    - echo $GE_JOB_ID
   needs:
-    - job: build-netinstall
+    - job: build_netinstall
       artifacts: true
   release:
     name: 'Release Images $CI_COMMIT_SHORT_SHA'
