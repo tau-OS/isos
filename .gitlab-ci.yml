@@ -4,6 +4,8 @@ stages:
 
 build_netinstall:
   stage: build
+  tags:
+    - privileged
   script:
     - dnf install -y lorax wget
     - wget https://download.fedoraproject.org/pub/fedora/linux/releases/35/Server/x86_64/iso/Fedora-Server-netinst-x86_64-35-1.2.iso -O base.iso
