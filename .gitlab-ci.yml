@@ -7,7 +7,7 @@ build_desktop:
   tags:
     - privileged
   script:
-    - dnf install -y lorax wget rpm-ostree
+    - dnf install -y lorax wget rpm-ostree git
     - ostree init --repo repo --mode archive
     - ostree remote add --repo repo tau https://ostree.tau.innatical.com tau/core/1/x86_64
     - wget -qO- https://tauos.co/gpg.asc | ostree remote gpg-import --repo repo --stdin tau 
