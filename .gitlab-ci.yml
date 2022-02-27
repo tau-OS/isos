@@ -11,7 +11,7 @@ build_desktop:
     - ostree init --repo repo --mode archive
     - ostree remote add --repo repo tau https://ostree.tau.innatical.com tau/core/1/x86_64
     - wget -qO- https://tauos.co/gpg.asc | ostree remote gpg-import --repo repo --stdin tau 
-    - ostree pull --repo repo tau
+    - ostree pull --repo repo tau tau/core/1/x86_64
     - git clone https://pagure.io/fedora-lorax-templates.git
     - lorax --product=tauOS \
       --version=1 \
