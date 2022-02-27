@@ -20,6 +20,12 @@ build_desktop:
       --source=https://repo.tauos.co/releases/1/ \
       --installpkgs=tau-logos \
       --installpkgs=tau-release \
+      --installpkgs=tau-release-identity \
+      --installpkgs=tau-release-ostree-desktop \
+      --installpkgs=tau-repos \
+      --installpkgs=tau-repos-ostree \
+      --installpkgs=tau-gpg-keys \
+      --installpkgs=fedora-repos \
       --variant=Desktop \
       --volid=tauOS-Desktop-Installer \
       --macboot \
