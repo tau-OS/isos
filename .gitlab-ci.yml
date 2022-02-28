@@ -44,9 +44,13 @@ build_desktop:
       --tmp=$(pwd)/tmp \
       --rootfs-size=8 \
       $(pwd)/desktop_x86_64
+    - echo GE_JOB_ID=$CI_JOB_ID >> generate_executables.env
   artifacts:
     paths:
       - desktop_x86_64
+    reports:
+      dotenv: generate_executables.env
+
 
 release_all:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
