@@ -69,6 +69,6 @@ release_all:
     assets:
       links:
         - name: 'Desktop Installer (x86_64)'
-          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/file/desktop_x86_64'
+          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/raw/desktop_x86_64/images/boot.iso?inline=false'
   only:
     - main
