@@ -2,6 +2,7 @@ stages:
   - build
   - release
 
+# TODO: Add variant once we get varient specific branding
 build_desktop:
   stage: build
   tags:
@@ -27,7 +28,6 @@ build_desktop:
       --installpkgs=tau-repos-ostree \
       --installpkgs=tau-gpg-keys \
       --installpkgs=fedora-repos \
-      --variant=desktop \
       --volid=tauOS-Desktop-Installer \
       --macboot \
       --skip-branding \
