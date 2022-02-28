@@ -2,7 +2,6 @@ stages:
   - build
   - release
 
-# TODO: Add variant once we get varient specific branding
 build_desktop:
   stage: build
   tags:
@@ -18,6 +17,7 @@ build_desktop:
       lorax --product=tauOS \
       --version=1 \
       --release=1 \
+      --variant=desktop \
       --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/x86_64/os/ \
       --source=https://repo.tauos.co/releases/1/ \
       --installpkgs=tau-logos \
