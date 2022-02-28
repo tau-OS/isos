@@ -28,6 +28,7 @@ build_desktop:
       --installpkgs=tau-repos-ostree \
       --installpkgs=tau-gpg-keys \
       --installpkgs=fedora-repos \
+      --installpkgs=tau-anaconda-profiles \
       --volid=tauOS-Desktop-Installer \
       --macboot \
       --skip-branding \
