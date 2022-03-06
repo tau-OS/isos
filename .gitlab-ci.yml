@@ -35,7 +35,7 @@ build_desktop:
       --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-configure-repo.tmpl \
       --add-template=$(pwd)/fedora-lorax-templates/ostree-based-installer/lorax-embed-repo.tmpl \
       --add-template-var=ostree_install_repo=file://$(pwd)/repo \
-      --add-template-var=ostree_update_repo=file://$(pwd)/repo \
+      --add-template-var=ostree_update_repo=https://ostree.tau.innatical.com \
       --add-template-var=ostree_osname=tauOS \
       --add-template-var=ostree_oskey=tauOS-desktop \
       --add-template-var=ostree_contenturl=https://ostree.tau.innatical.com \
