@@ -1,0 +1,17 @@
+## Lorax template to configure Anaconda to:
+##  1) Use the repository we embedded in the ISO
+##  2) Work around https://bugzilla.redhat.com/show_bug.cgi?id=1193590
+##  3) Tell anaconda to leave the firewall set up as it was in the ostree
+## Args:
+##  - ostree_osname      - the name of the os/name of remote
+##  - ostree_install_repo- the url of the remote during ISO creation
+##  - ostree_install_ref - the ref to use when creating the ISO  
+##  - ostree_update_ref  - the ref to use for updates of an installed system
+ 
+<%page args="ostree_osname, ostree_install_repo, ostree_install_ref, ostree_update_ref, ostree_oskey"/>
+append usr/share/anaconda/interactive-defaults.ks "ostreesetup --nogpg --osname=${ostree_osname} --remote=${ostree_osname} --url=file:///ostree/repo --ref=${ostree_update_ref}"
+append usr/share/anaconda/interactive-defaults.ks "firewall --use-system-defaults"
+ 
+append usr/share/anaconda/interactive-defaults.ks "%post --erroronfail"
+append usr/share/anaconda/interactive-defaults.ks "cp /etc/skel/.bash* /root"
+append usr/share/anaconda/interactive-defaults.ks "%end"

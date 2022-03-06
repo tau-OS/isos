@@ -1,0 +1,19 @@
+## Lorax template to embed an OSTree repository into the installer.iso
+## and configure an interactive installer use to look for it.
+##
+## Note that we pull with depth=0 to only get *one* commit into the
+## ISO, because we obviously don't want the full history.
+## Args:
+##  - root               - the root directory of the iso tree
+##  - ostree_osname      - the name of the os/name of remote
+##  - ostree_install_repo- the url of the remote during ISO creation
+##  - ostree_install_ref - the ref to use when creating the ISO  
+##  - ostree_update_ref  - the ref to use for updates of an installed system
+ 
+<%page args="root, ostree_osname, ostree_install_repo, ostree_update_repo, ostree_install_ref, ostree_update_ref"/>
+runcmd mkdir ${root}/ostree
+runcmd ostree --repo=${root}/ostree/repo init --mode=bare
+runcmd ostree --repo=${root}/ostree/repo remote add ${ostree_osname} --set=gpg-verify=false ${ostree_install_repo}
+runcmd ostree --repo=${root}/ostree/repo pull --mirror ${ostree_osname} ${ostree_install_ref}
+runcmd bash -c 'if [ "${ostree_install_ref}" != "${ostree_update_ref}" ]; then ostree --repo=${root}/ostree/repo refs ${ostree_install_ref} --create ${ostree_update_ref}; fi'
+runcmd ostree --repo=${root}/ostree/repo summary -u
