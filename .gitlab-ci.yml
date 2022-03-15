@@ -2,21 +2,21 @@ stages:
   - build
   - release
 
-build_desktop:
+build_home:
   stage: build
   tags:
     - privileged
   script:
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
-    - ostree remote add --repo repo tauOS https://ostree.tau.innatical.com tau/home/1/x86_64
+    - ostree remote add --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/x86_64
     - wget -qO- https://tauos.co/gpg.asc | ostree remote gpg-import --repo repo --stdin tauOS 
     - until ostree pull --repo repo --mirror tauOS tau/home/1/x86_64; do echo "Try again"; done
     - |
       lorax --product=tauOS \
       --version=1 \
       --release=1 \
-      --variant=desktop \
+      --variant=home \
       --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/x86_64/os/ \
       --source=https://repo.tauos.co/releases/1/ \
       --installpkgs=tau-logos \
@@ -27,26 +27,26 @@ build_desktop:
       --installpkgs=tau-gpg-keys \
       --installpkgs=fedora-repos \
       --installpkgs=tau-anaconda-profiles \
-      --volid=tauOS-Desktop-Installer \
+      --volid=tauOS-Home-Installer \
       --macboot \
       --skip-branding \
       --add-template=$(pwd)/lorax-configure-repo.tmpl \
       --add-template=$(pwd)/lorax-embed-repo.tmpl \
       --add-template-var=ostree_install_repo=file://$(pwd)/repo \
-      --add-template-var=ostree_update_repo=https://ostree.tau.innatical.com \
+      --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
       --add-template-var=ostree_osname=tauOS \
-      --add-template-var=ostree_oskey=tauOS-desktop \
-      --add-template-var=ostree_contenturl=https://ostree.tau.innatical.com \
+      --add-template-var=ostree_oskey=tauOS-home \
+      --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
       --add-template-var=ostree_install_ref=tau/home/1/x86_64 \
       --add-template-var=ostree_update_ref=tau/home/1/x86_64 \
       --logfile=$(pwd)/lorax.log \
       --tmp=$(pwd)/tmp \
       --rootfs-size=8 \
-      $(pwd)/desktop_x86_64
+      $(pwd)/home_x86_64
     - echo GE_JOB_ID=$CI_JOB_ID >> generate_executables.env
   artifacts:
     paths:
-      - desktop_x86_64
+      - home_x86_64
     reports:
       dotenv: generate_executables.env
 
@@ -59,7 +59,7 @@ release_all:
     - echo 'Previous Job ID is printed below'
     - echo $GE_JOB_ID
   needs:
-    - job: build_desktop
+    - job: build_home
       artifacts: true
   release:
     name: 'Release Images $CI_COMMIT_SHORT_SHA'
@@ -67,7 +67,7 @@ release_all:
     tag_name: '$CI_COMMIT_SHORT_SHA-$GE_JOB_ID'
     assets:
       links:
-        - name: 'Desktop Installer (x86_64)'
-          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/raw/desktop_x86_64/images/boot.iso?inline=false'
+        - name: 'Home Installer (x86_64)'
+          url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${GE_JOB_ID}/artifacts/raw/home_x86_64/images/boot.iso?inline=false'
   only:
     - main
