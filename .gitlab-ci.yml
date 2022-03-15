@@ -9,9 +9,8 @@ build_home:
   script:
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
-    - ostree remote add --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/x86_64
-    - wget -qO- https://tauos.co/gpg.asc | ostree remote gpg-import --repo repo --stdin tauOS 
-    - until ostree pull --repo repo --mirror tauOS tau/home/1/x86_64; do echo "Try again"; done
+    - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/x86_64
+    - ostree pull --repo repo --mirror tauOS tau/home/1/x86_64
     - |
       lorax --product=tauOS \
       --version=1 \
