@@ -52,7 +52,7 @@ build-home-x86_64:
 build-home-aarch64:
   stage: build
   tags:
-    - privileged
+    - privileged-arm
   script:
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
