@@ -58,9 +58,10 @@ build-home-aarch64:
     - ostree init --repo repo --mode archive
     - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/aarch64
     - ostree pull --repo repo --mirror tauOS tau/home/1/aarch64
-    - echo "[compression]\nbcj=off" >> /etc/lorax/lorax.conf 
+    - echo "[compression]\nbcj=off" > lorax.conf
     - |
       lorax --product=tauOS \
+      -c=lorax.conf \
       --version=1 \
       --release=1 \
       --variant=home \
