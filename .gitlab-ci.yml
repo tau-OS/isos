@@ -54,7 +54,7 @@ build-home-aarch64:
   tags:
     - privileged-arm
   script:
-    - echo "[compression]\nbcj=off" > lorax.conf
+    - echo -e "[compression]\nbcj=off" > lorax.conf
     - cat lorax.conf
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
