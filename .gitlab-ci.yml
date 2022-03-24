@@ -54,11 +54,12 @@ build-home-aarch64:
   tags:
     - privileged-arm
   script:
+    - echo "[compression]\nbcj=off" > lorax.conf
+    - cat lorax.conf
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
     - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/aarch64
     - ostree pull --repo repo --mirror tauOS tau/home/1/aarch64
-    - echo "[compression]\nbcj=off" > lorax.conf
     - |
       lorax --product=tauOS \
       -c=lorax.conf \
