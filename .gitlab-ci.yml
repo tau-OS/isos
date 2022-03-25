@@ -9,15 +9,15 @@ build-home-x86_64:
   script:
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
-    - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/x86_64
-    - ostree pull --repo repo --mirror tauOS tau/home/1/x86_64
+    - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
+    - ostree pull --repo repo --mirror tauOS tau/home/1.1/x86_64
     - |
       lorax --product=tauOS \
-      --version=1 \
-      --release=1 \
+      --version=1.1 \
+      --release=1.1 \
       --variant=home \
-      --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/x86_64/os/ \
-      --source=https://repo.tauos.co/releases/1/ \
+      --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/x86_64/os/ \
+      --source=https://repo.tauos.co/releases/1.1/ \
       --installpkgs=tau-logos \
       --installpkgs=tau-release \
       --installpkgs=tau-release-identity \
@@ -36,8 +36,8 @@ build-home-x86_64:
       --add-template-var=ostree_osname=tauOS \
       --add-template-var=ostree_oskey=tauOS-home \
       --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-      --add-template-var=ostree_install_ref=tau/home/1/x86_64 \
-      --add-template-var=ostree_update_ref=tau/home/1/x86_64 \
+      --add-template-var=ostree_install_ref=tau/home/1.1/x86_64 \
+      --add-template-var=ostree_update_ref=tau/home/1.1/x86_64 \
       --logfile=$(pwd)/lorax.log \
       --tmp=$(pwd)/tmp \
       --rootfs-size=8 \
@@ -58,16 +58,16 @@ build-home-aarch64:
     - cat lorax.conf
     - dnf install -y lorax wget rpm-ostree git hfsplus-tools
     - ostree init --repo repo --mode archive
-    - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/aarch64
-    - ostree pull --repo repo --mirror tauOS tau/home/1/aarch64
+    - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/aarch64
+    - ostree pull --repo repo --mirror tauOS tau/home/1.1/aarch64
     - |
       lorax --product=tauOS \
       -c=lorax.conf \
-      --version=1 \
-      --release=1 \
+      --version=1.1 \
+      --release=1.1 \
       --variant=home \
-      --source=https://kojipkgs.fedoraproject.org/compose/35/latest-Fedora-35/compose/Everything/aarch64/os/ \
-      --source=https://repo.tauos.co/releases/1/ \
+      --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/aarch64/os/ \
+      --source=https://repo.tauos.co/releases/1.1/ \
       --installpkgs=tau-logos \
       --installpkgs=tau-release \
       --installpkgs=tau-release-identity \
@@ -77,7 +77,7 @@ build-home-aarch64:
       --installpkgs=fedora-repos \
       --installpkgs=tau-anaconda-profiles \
       --volid=tauOS-Home-Installer \
-      --macboot \
+      --nomacboot \
       --skip-branding \
       --add-template=$(pwd)/lorax-configure-repo.tmpl \
       --add-template=$(pwd)/lorax-embed-repo.tmpl \
@@ -86,8 +86,8 @@ build-home-aarch64:
       --add-template-var=ostree_osname=tauOS \
       --add-template-var=ostree_oskey=tauOS-home \
       --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-      --add-template-var=ostree_install_ref=tau/home/1/aarch64 \
-      --add-template-var=ostree_update_ref=tau/home/1/aarch64 \
+      --add-template-var=ostree_install_ref=tau/home/1.1/aarch64 \
+      --add-template-var=ostree_update_ref=tau/home/1.1/aarch64 \
       --logfile=$(pwd)/lorax.log \
       --tmp=$(pwd)/tmp \
       --rootfs-size=8 \
