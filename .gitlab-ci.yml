@@ -117,7 +117,7 @@ release-all:
       links:
         - name: 'Home Installer (x86_64)'
           url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${HOME_x86_64_JOB_ID}/artifacts/raw/home-x86_64/images/boot.iso?inline=false'
-        - name: 'Home Installer (x86_64)'
+        - name: 'Home Installer (aarch64)'
           url: 'https://sourceview.innatical.com/tauos/isos/-/jobs/${HOME_AARCH64_JOB_ID}/artifacts/raw/home-aarch64/images/boot.iso?inline=false'
   only:
     - main
