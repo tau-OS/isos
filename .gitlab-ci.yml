@@ -12,7 +12,7 @@ build-home-x86_64:
     - ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
     - ostree pull --repo repo --mirror tauOS tau/home/1.1/x86_64
     - |
-      lorax --product=tau \
+      lorax --product=tauOS \
       --version=1.1 \
       --release=1.1 \
       --variant=home \
