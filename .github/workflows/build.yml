@@ -12,6 +12,7 @@ jobs:
       image: fedora:latest
       options: --privileged
     steps:
+      - uses: actions/checkout@v3
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
       - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
