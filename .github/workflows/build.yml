@@ -33,7 +33,7 @@ jobs:
           --installpkgs=fedora-repos \
           --installpkgs=tau-anaconda-profiles \
           --volid=tauOS-Home-Installer \
-          --macboot \
+          --nomacboot \
           --skip-branding \
           --add-template=$(pwd)/lorax-configure-repo.tmpl \
           --add-template=$(pwd)/lorax-embed-repo.tmpl \
