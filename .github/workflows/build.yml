@@ -20,7 +20,7 @@ jobs:
       - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
       - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/x86_64
       - run: |
-          lorax --product=tauOS \
+          lorax --product=tauOS Home \
           --version=1.1 \
           --release=1.1 \
           --variant=home \
@@ -28,8 +28,7 @@ jobs:
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
-          --installpkgs=tau-release-identity \
-          --installpkgs=tau-release-ostree-desktop \
+          --installpkgs=tau-release-desktop \
           --installpkgs=tau-repos \
           --installpkgs=tau-gpg-keys \
           --installpkgs=fedora-repos \
@@ -41,7 +40,7 @@ jobs:
           --add-template=$(pwd)/lorax-embed-repo.tmpl \
           --add-template-var=ostree_install_repo=file://$(pwd)/repo \
           --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_osname=tauOS \
+          --add-template-var=ostree_osname=tauOS Home \
           --add-template-var=ostree_oskey=tauOS-home \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
           --add-template-var=ostree_install_ref=tau/home/1.1/x86_64 \
@@ -55,3 +54,48 @@ jobs:
         with:
           name: home-x86_64.iso
           path: home-x86_64/images/boot.iso
+  build-workstation-x86_64:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v3
+      - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
+      - run: ostree init --repo repo --mode archive
+      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/workstation/22/x86_64
+      - run: ostree pull --repo repo --mirror tauOS tau/workstation/22/x86_64
+      - run: |
+          lorax --product=tauOS Workstation \
+          --version=22 \
+          --release=22 \
+          --variant=home \
+          --source=http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/ \
+          --source=https://repo.tauos.co/releases/1.1/ \
+          --installpkgs=tau-logos \
+          --installpkgs=tau-release \
+          --installpkgs=tau-release-desktop \
+          --installpkgs=tau-repos \
+          --installpkgs=tau-gpg-keys \
+          --installpkgs=tau-anaconda-profiles \
+          --volid=tauOS-Workstation-Installer \
+          --nomacboot \
+          --skip-branding \
+          --add-template=$(pwd)/lorax-configure-repo.tmpl \
+          --add-template=$(pwd)/lorax-embed-repo.tmpl \
+          --add-template-var=ostree_install_repo=file://$(pwd)/repo \
+          --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
+          --add-template-var=ostree_osname=tauOS Workstation \
+          --add-template-var=ostree_oskey=tauOS-workstation \
+          --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
+          --add-template-var=ostree_install_ref=tau/workstation/22/x86_64 \
+          --add-template-var=ostree_update_ref=tau/workstation/22/x86_64 \
+          --logfile=$(pwd)/lorax.log \
+          --tmp=$(pwd)/tmp \
+          --rootfs-size=8 \
+          $(pwd)/home-x86_64
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: workstation-x86_64.iso
+          path: workstation-x86_64/images/dvd1.iso
