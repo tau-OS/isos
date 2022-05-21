@@ -71,6 +71,7 @@ jobs:
           --release=22 \
           --variant=home \
           --source=http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/ \
+          --source=http://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/ \
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
