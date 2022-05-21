@@ -40,7 +40,7 @@ jobs:
           --add-template=$(pwd)/lorax-embed-repo.tmpl \
           --add-template-var=ostree_install_repo=file://$(pwd)/repo \
           --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_osname=tauOS Home \
+          --add-template-var=ostree_osname=tauOS \
           --add-template-var=ostree_oskey=tauOS-home \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
           --add-template-var=ostree_install_ref=tau/home/1.1/x86_64 \
@@ -85,7 +85,7 @@ jobs:
           --add-template=$(pwd)/lorax-embed-repo.tmpl \
           --add-template-var=ostree_install_repo=file://$(pwd)/repo \
           --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_osname=tauOS Workstation \
+          --add-template-var=ostree_osname=tauOS \
           --add-template-var=ostree_oskey=tauOS-workstation \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
           --add-template-var=ostree_install_ref=tau/workstation/22/x86_64 \
