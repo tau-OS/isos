@@ -20,7 +20,7 @@ jobs:
       - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
       - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/x86_64
       - run: |
-          lorax --product=tauOS Home \
+          lorax --product=tauOS \
           --version=1.1 \
           --release=1.1 \
           --variant=home \
@@ -66,7 +66,7 @@ jobs:
       - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/workstation/22/x86_64
       - run: ostree pull --repo repo --mirror tauOS tau/workstation/22/x86_64
       - run: |
-          lorax --product=tauOS Workstation \
+          lorax --product=tauOS \
           --version=22 \
           --release=22 \
           --variant=home \
