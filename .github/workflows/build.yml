@@ -23,7 +23,7 @@ jobs:
           lorax --product=tauOS \
           --version=1.1 \
           --release=1.1 \
-          --variant=home \
+          --variant=desktop \
           --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/x86_64/os/ \
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
