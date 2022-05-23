@@ -33,6 +33,10 @@ jobs:
           --installpkgs=tau-gpg-keys \
           --installpkgs=fedora-repos \
           --installpkgs=tau-anaconda-profiles \
+          --installpkgs=tau-plymouth \
+          --installpkgs=tau-helium \
+          --installpkgs=tau-hydrogen \
+          --installpkgs=tau-manrope-fonts \
           --volid=tauOS-Home-Installer \
           --nomacboot \
           --skip-branding \
@@ -74,11 +78,15 @@ jobs:
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
-          --installpkgs=tau-release-core \
+          --installpkgs=tau-release-desktop \
           --installpkgs=tau-repos \
           --installpkgs=tau-gpg-keys \
           --installpkgs=fedora-repos \
           --installpkgs=tau-anaconda-profiles \
+          --installpkgs=tau-plymouth \
+          --installpkgs=tau-helium \
+          --installpkgs=tau-hydrogen \
+          --installpkgs=tau-manrope-fonts \
           --volid=tauOS-Core-Installer \
           --nomacboot \
           --skip-branding \
@@ -125,6 +133,10 @@ jobs:
           --installpkgs=tau-repos \
           --installpkgs=tau-gpg-keys \
           --installpkgs=tau-anaconda-profiles \
+          --installpkgs=tau-plymouth \
+          --installpkgs=tau-helium \
+          --installpkgs=tau-hydrogen \
+          --installpkgs=tau-manrope-fonts \
           --volid=tauOS-Workstation-Installer \
           --nomacboot \
           --skip-branding \
