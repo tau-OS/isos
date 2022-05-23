@@ -74,6 +74,7 @@ jobs:
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
+          --installpkgs=tau-release-core \
           --installpkgs=tau-repos \
           --installpkgs=tau-gpg-keys \
           --installpkgs=fedora-repos \
