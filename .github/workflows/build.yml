@@ -115,12 +115,14 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - run: echo -e "[compression]\nbcj=off" > lorax.conf
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
       - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/aarch64
       - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/aarch64
       - run: |
           lorax --product=tauOS \
+          -c=lorax.conf \
           --version=1.1 \
           --release=1.1 \
           --variant=desktop \
@@ -165,12 +167,14 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - run: echo -e "[compression]\nbcj=off" > lorax.conf
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
       - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/aarch64
       - run: ostree pull --repo repo --mirror tauOS tau/core/1.1/aarch64
       - run: |
           lorax --product=tauOS \
+          -c=lorax.conf \
           --version=1.1 \
           --release=1.1 \
           --variant=core \
