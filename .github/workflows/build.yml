@@ -108,6 +108,106 @@ jobs:
         with:
           name: core-x86_64.iso
           path: core-x86_64/images/boot.iso
+  build-home-aarch64:
+    runs-on: ARM64
+    container:
+      image: fedora:latest
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v3
+      - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
+      - run: ostree init --repo repo --mode archive
+      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/aarch64
+      - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/aarch64
+      - run: |
+          lorax --product=tauOS \
+          --version=1.1 \
+          --release=1.1 \
+          --variant=desktop \
+          --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/aarch64/os/ \
+          --source=https://repo.tauos.co/releases/1.1/ \
+          --installpkgs=tau-logos \
+          --installpkgs=tau-release \
+          --installpkgs=tau-release-desktop \
+          --installpkgs=tau-repos \
+          --installpkgs=tau-gpg-keys \
+          --installpkgs=fedora-repos \
+          --installpkgs=tau-anaconda-profiles \
+          --installpkgs=tau-plymouth \
+          --installpkgs=tau-helium \
+          --installpkgs=tau-hydrogen \
+          --installpkgs=tau-manrope-fonts \
+          --volid=tauOS-Home-Installer \
+          --nomacboot \
+          --skip-branding \
+          --add-template=$(pwd)/lorax-configure-repo.tmpl \
+          --add-template=$(pwd)/lorax-embed-repo.tmpl \
+          --add-template-var=ostree_install_repo=file://$(pwd)/repo \
+          --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
+          --add-template-var=ostree_osname=tauOS \
+          --add-template-var=ostree_oskey=tauOS-home \
+          --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
+          --add-template-var=ostree_install_ref=tau/home/1.1/aarch64 \
+          --add-template-var=ostree_update_ref=tau/home/1.1/aarch64 \
+          --logfile=$(pwd)/lorax.log \
+          --tmp=$(pwd)/tmp \
+          --rootfs-size=8 \
+          $(pwd)/home-aarch64
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: home-aarch64.iso
+          path: home-aarch64/images/boot.iso
+  build-core-aarch64:
+    runs-on: ARM64
+    container:
+      image: fedora:latest
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v3
+      - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
+      - run: ostree init --repo repo --mode archive
+      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/aarch64
+      - run: ostree pull --repo repo --mirror tauOS tau/core/1.1/aarch64
+      - run: |
+          lorax --product=tauOS \
+          --version=1.1 \
+          --release=1.1 \
+          --variant=core \
+          --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/aarch64/os/ \
+          --source=https://repo.tauos.co/releases/1.1/ \
+          --installpkgs=tau-logos \
+          --installpkgs=tau-release \
+          --installpkgs=tau-release-desktop \
+          --installpkgs=tau-repos \
+          --installpkgs=tau-gpg-keys \
+          --installpkgs=fedora-repos \
+          --installpkgs=tau-anaconda-profiles \
+          --installpkgs=tau-plymouth \
+          --installpkgs=tau-helium \
+          --installpkgs=tau-hydrogen \
+          --installpkgs=tau-manrope-fonts \
+          --volid=tauOS-Core-Installer \
+          --nomacboot \
+          --skip-branding \
+          --add-template=$(pwd)/lorax-configure-repo.tmpl \
+          --add-template=$(pwd)/lorax-embed-repo.tmpl \
+          --add-template-var=ostree_install_repo=file://$(pwd)/repo \
+          --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
+          --add-template-var=ostree_osname=tauOS \
+          --add-template-var=ostree_oskey=tauOS-core \
+          --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
+          --add-template-var=ostree_install_ref=tau/core/1.1/aarch64 \
+          --add-template-var=ostree_update_ref=tau/core/1.1/aarch64 \
+          --logfile=$(pwd)/lorax.log \
+          --tmp=$(pwd)/tmp \
+          --rootfs-size=8 \
+          $(pwd)/core-aarch64
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: core-aarch64.iso
+          path: core-aarch64/images/boot.iso
   build-workstation-x86_64:
     runs-on: ubuntu-latest
     container:
