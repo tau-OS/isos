@@ -263,6 +263,8 @@ jobs:
           name: workstation-x86_64.iso
           path: workstation-x86_64/images/dvd1.iso
   publish:
+    if: ${{ always() }}
+    needs: [build-workstation-x86_64, build-core-aarch64, build-home-aarch64, build-core-x86_64, build-home-x86_64]
     runs-on: ubuntu-latest
     container:
       image: fedora:latest
@@ -273,8 +275,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        name: ${{ github.ref }}
-        tag_name:  ${{ github.ref }}
+        name: "tauOS Latest ISO - ${{ github.run_id }}"
+        tag_name:  ${{ github.run_id }}
         files: |
           workstation-x86_64.iso
           core-aarch64.iso
