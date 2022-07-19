@@ -274,6 +274,7 @@ jobs:
       with:
         prerelease: true
         name: ${{ github.ref }}
+        tag_name:  ${{ github.ref }}
         files: |
           workstation-x86_64.iso
           core-aarch64.iso
