@@ -262,3 +262,22 @@ jobs:
         with:
           name: workstation-x86_64.iso
           path: workstation-x86_64/images/dvd1.iso
+  publish:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v3
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        name: ${{ github.ref }}
+        files: |
+          workstation-x86_64.iso
+          core-aarch64.iso
+          home-aarch64.iso
+          core-x86_64.iso
+          home-x86_64.iso
+        
