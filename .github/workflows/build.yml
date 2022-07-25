@@ -223,11 +223,17 @@ jobs:
     - uses: actions/checkout@v3
     - name: Download Artifacts
       uses: actions/download-artifact@v3.0.0
+    - name: Prepare for Upload
+      run: |
+        mv home-x86_64/images/boot.iso home-x86_64.iso
+        mv core-x86_64/images/boot.iso core-x86_64.iso
+        mv home-aarch64/images/boot.iso home-aarch64.iso
+        mv core-aarch64/images/boot.iso core-aarch64.iso
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
         name: "tauOS Latest ISO - ${{ github.run_id }}"
         tag_name:  ${{ github.run_id }}
-        files: "**/*.iso"
+        files: "*.iso"
         
