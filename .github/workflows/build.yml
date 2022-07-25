@@ -229,9 +229,5 @@ jobs:
         prerelease: true
         name: "tauOS Latest ISO - ${{ github.run_id }}"
         tag_name:  ${{ github.run_id }}
-        files: |
-          isos/isos/core-aarch64.iso
-          isos/isos/home-aarch64.iso
-          isos/isos/core-x86_64.iso
-          isos/isos/home-x86_64.iso
+        files: "**/*.iso"
         
