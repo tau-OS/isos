@@ -225,10 +225,10 @@ jobs:
       uses: actions/download-artifact@v3.0.0
     - name: Prepare for Upload
       run: |
-        mv home-x86_64/images/boot.iso home-x86_64.iso
-        mv core-x86_64/images/boot.iso core-x86_64.iso
-        mv home-aarch64/images/boot.iso home-aarch64.iso
-        mv core-aarch64/images/boot.iso core-aarch64.iso
+        mv isos/home-x86_64/images/boot.iso home-x86_64.iso
+        mv isos/core-x86_64/images/boot.iso core-x86_64.iso
+        mv isos/home-aarch64/images/boot.iso home-aarch64.iso
+        mv isos/core-aarch64/images/boot.iso core-aarch64.iso
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
