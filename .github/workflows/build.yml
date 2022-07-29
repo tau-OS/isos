@@ -225,6 +225,8 @@ jobs:
       uses: actions/download-artifact@v3.0.0
     - name: Prepare for Upload
       run: |
+        dnf install -y tree
+        tree
         mv isos/home-x86_64/images/boot.iso home-x86_64.iso
         mv isos/core-x86_64/images/boot.iso core-x86_64.iso
         mv isos/home-aarch64/images/boot.iso home-aarch64.iso
