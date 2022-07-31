@@ -247,10 +247,28 @@ jobs:
         mv images/core-x86_64.iso/boot.iso core-x86_64.iso
         mv images/home-aarch64.iso/boot.iso home-aarch64.iso
         mv images/core-aarch64.iso/boot.iso core-aarch64.iso
-    - name: Create Release
+    - name: Release home-x86_64.iso
       uses: softprops/action-gh-release@v1
       with:
         name: "tauOS Latest ISO - ${{ github.run_id }}"
-        tag_name:  ${{ github.run_id }}
-        files: "*.iso"
+        tag_name: ${{ github.run_id }}
+        files: home-x86_64.iso
+    - name: Release core-x86_64.iso
+      uses: softprops/action-gh-release@v1
+      with:
+        name: "tauOS Latest ISO - ${{ github.run_id }}"
+        tag_name: ${{ github.run_id }}
+        files: core-x86_64.iso
+    - name: Release home-aarch64.iso
+      uses: softprops/action-gh-release@v1
+      with:
+        name: "tauOS Latest ISO - ${{ github.run_id }}"
+        tag_name: ${{ github.run_id }}
+        files: home-aarch64.iso
+    - name: Release core-aarch64.iso
+      uses: softprops/action-gh-release@v1
+      with:
+        name: "tauOS Latest ISO - ${{ github.run_id }}"
+        tag_name: ${{ github.run_id }}
+        files: core-aarch64.iso
         
