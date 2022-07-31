@@ -15,9 +15,13 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: repo
+          key: home-x86_64
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
       - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/x86_64
       - run: |
           lorax --product=tauOS \
@@ -65,9 +69,13 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: repo
+          key: core-x86_64
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/x86_64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/x86_64
       - run: ostree pull --repo repo --mirror tauOS tau/core/1.1/x86_64
       - run: |
           lorax --product=tauOS \
@@ -115,10 +123,14 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: repo
+          key: home-aarch64
       - run: echo -e "[compression]\nbcj=off" > lorax.conf
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/aarch64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/aarch64
       - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/aarch64
       - run: |
           lorax --product=tauOS \
@@ -167,10 +179,14 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: repo
+          key: core-aarch64
       - run: echo -e "[compression]\nbcj=off" > lorax.conf
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/aarch64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/aarch64
       - run: ostree pull --repo repo --mirror tauOS tau/core/1.1/aarch64
       - run: |
           lorax --product=tauOS \
