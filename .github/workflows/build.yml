@@ -261,3 +261,4 @@ jobs:
       with:
         tag: ${{ github.run_id }}
         draft: false
+        allowUpdates: true
