@@ -247,10 +247,17 @@ jobs:
         mv images/core-x86_64.iso/boot.iso core-x86_64.iso
         mv images/home-aarch64.iso/boot.iso home-aarch64.iso
         mv images/core-aarch64.iso/boot.iso core-aarch64.iso
-    - name: Release ISOs
-      uses: svenstaro/upload-release-action@v2
+    - name: Create Draft Release
+      uses: ncipollo/release-action@v1.10.0
       with:
-        release_name: "tauOS Latest ISO - ${{ github.run_id }}"
+        name: "tauOS Latest ISO - ${{ github.run_id }}"
+        artifacts: "*.iso"
+        artifactErrorsFailBuild: true
         tag: ${{ github.run_id }}
-        file: "*.iso"
-        file_glob: true
+        commit: main
+        draft: true
+    - name: Publish Draft Release
+      uses: ncipollo/release-action@v1.10.0
+      with:
+        tag: ${{ github.run_id }}
+        draft: false
