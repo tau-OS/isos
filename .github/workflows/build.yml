@@ -46,6 +46,7 @@ jobs:
           --skip-branding \
           --add-template=$(pwd)/lorax-configure-repo.tmpl \
           --add-template=$(pwd)/lorax-embed-repo.tmpl \
+          --add-template=$(pwd)/lorax-embed-flatpaks.tmpl \
           --add-template-var=ostree_install_repo=file://$(pwd)/repo \
           --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
           --add-template-var=ostree_osname=tauOS \
