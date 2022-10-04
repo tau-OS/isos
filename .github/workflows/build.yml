@@ -58,7 +58,7 @@ jobs:
           --rootfs-size=8 \
           --flatpak_remote_name=flathub \
           --flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot
+          --flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
           $(pwd)/home-x86_64
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.0.0
