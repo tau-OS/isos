@@ -54,12 +54,12 @@ jobs:
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
           --add-template-var=ostree_install_ref=tau/home/1.1/x86_64 \
           --add-template-var=ostree_update_ref=tau/home/1.1/x86_64 \
+          --add-template-var=flatpak_remote_name=flathub \
+          --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
+          --add-template-var=flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
-          --flatpak_remote_name=flathub \
-          --flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
           $(pwd)/home-x86_64
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.0.0
@@ -160,6 +160,7 @@ jobs:
           --skip-branding \
           --add-template=$(pwd)/lorax-configure-repo.tmpl \
           --add-template=$(pwd)/lorax-embed-repo.tmpl \
+          --add-template=$(pwd)/lorax-embed-flatpaks.tmpl \
           --add-template-var=ostree_install_repo=file://$(pwd)/repo \
           --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
           --add-template-var=ostree_osname=tauOS \
@@ -167,6 +168,9 @@ jobs:
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
           --add-template-var=ostree_install_ref=tau/home/1.1/aarch64 \
           --add-template-var=ostree_update_ref=tau/home/1.1/aarch64 \
+          --add-template-var=flatpak_remote_name=flathub \
+          --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
+          --add-template-var=flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
