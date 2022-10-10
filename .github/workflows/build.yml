@@ -21,15 +21,15 @@ jobs:
           key: home-x86_64
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/x86_64
-      - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/x86_64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/x86_64
+      - run: ostree pull --repo repo --mirror tauOS tau/home/1/x86_64
       - run: |
           lorax --product=tauOS \
-          --version=1.1 \
-          --release=1.1 \
+          --version=1 \
+          --release=1 \
           --variant=desktop \
           --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/x86_64/os/ \
-          --source=https://repo.tauos.co/releases/1.1/ \
+          --source=https://repo.tauos.co/releases/1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
@@ -52,8 +52,8 @@ jobs:
           --add-template-var=ostree_osname=tauOS \
           --add-template-var=ostree_oskey=tauOS-home \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_install_ref=tau/home/1.1/x86_64 \
-          --add-template-var=ostree_update_ref=tau/home/1.1/x86_64 \
+          --add-template-var=ostree_install_ref=tau/home/1/x86_64 \
+          --add-template-var=ostree_update_ref=tau/home/1/x86_64 \
           --add-template-var=flatpak_remote_name=flathub \
           --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
           --add-template-var=flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
@@ -79,15 +79,15 @@ jobs:
           key: core-x86_64
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/x86_64
-      - run: ostree pull --repo repo --mirror tauOS tau/core/1.1/x86_64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1/x86_64
+      - run: ostree pull --repo repo --mirror tauOS tau/core/1/x86_64
       - run: |
           lorax --product=tauOS \
-          --version=1.1 \
-          --release=1.1 \
+          --version=1 \
+          --release=1 \
           --variant=core \
           --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/x86_64/os/ \
-          --source=https://repo.tauos.co/releases/1.1/ \
+          --source=https://repo.tauos.co/releases/1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
@@ -109,8 +109,8 @@ jobs:
           --add-template-var=ostree_osname=tauOS \
           --add-template-var=ostree_oskey=tauOS-core \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_install_ref=tau/core/1.1/x86_64 \
-          --add-template-var=ostree_update_ref=tau/core/1.1/x86_64 \
+          --add-template-var=ostree_install_ref=tau/core/1/x86_64 \
+          --add-template-var=ostree_update_ref=tau/core/1/x86_64 \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
@@ -134,16 +134,16 @@ jobs:
       - run: echo -e "[compression]\nbcj=off" > lorax.conf
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1.1/aarch64
-      - run: ostree pull --repo repo --mirror tauOS tau/home/1.1/aarch64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/aarch64
+      - run: ostree pull --repo repo --mirror tauOS tau/home/1/aarch64
       - run: |
           lorax --product=tauOS \
           -c=lorax.conf \
-          --version=1.1 \
-          --release=1.1 \
+          --version=1 \
+          --release=1 \
           --variant=desktop \
           --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/aarch64/os/ \
-          --source=https://repo.tauos.co/releases/1.1/ \
+          --source=https://repo.tauos.co/releases/1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
@@ -166,8 +166,8 @@ jobs:
           --add-template-var=ostree_osname=tauOS \
           --add-template-var=ostree_oskey=tauOS-home \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_install_ref=tau/home/1.1/aarch64 \
-          --add-template-var=ostree_update_ref=tau/home/1.1/aarch64 \
+          --add-template-var=ostree_install_ref=tau/home/1/aarch64 \
+          --add-template-var=ostree_update_ref=tau/home/1/aarch64 \
           --add-template-var=flatpak_remote_name=flathub \
           --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
           --add-template-var=flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
@@ -194,16 +194,16 @@ jobs:
       - run: echo -e "[compression]\nbcj=off" > lorax.conf
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1.1/aarch64
-      - run: ostree pull --repo repo --mirror tauOS tau/core/1.1/aarch64
+      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1/aarch64
+      - run: ostree pull --repo repo --mirror tauOS tau/core/1/aarch64
       - run: |
           lorax --product=tauOS \
           -c=lorax.conf \
-          --version=1.1 \
-          --release=1.1 \
+          --version=1 \
+          --release=1 \
           --variant=core \
           --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/aarch64/os/ \
-          --source=https://repo.tauos.co/releases/1.1/ \
+          --source=https://repo.tauos.co/releases/1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
@@ -225,8 +225,8 @@ jobs:
           --add-template-var=ostree_osname=tauOS \
           --add-template-var=ostree_oskey=tauOS-core \
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_install_ref=tau/core/1.1/aarch64 \
-          --add-template-var=ostree_update_ref=tau/core/1.1/aarch64 \
+          --add-template-var=ostree_install_ref=tau/core/1/aarch64 \
+          --add-template-var=ostree_update_ref=tau/core/1/aarch64 \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
