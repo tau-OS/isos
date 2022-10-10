@@ -2,7 +2,7 @@ name: Build ISOs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
@@ -28,7 +28,7 @@ jobs:
           --version=1.1 \
           --release=1.1 \
           --variant=desktop \
-          --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/x86_64/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/x86_64/os/ \
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
@@ -86,7 +86,7 @@ jobs:
           --version=1.1 \
           --release=1.1 \
           --variant=core \
-          --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/x86_64/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/x86_64/os/ \
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
@@ -142,7 +142,7 @@ jobs:
           --version=1.1 \
           --release=1.1 \
           --variant=desktop \
-          --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/aarch64/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/aarch64/os/ \
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
@@ -202,7 +202,7 @@ jobs:
           --version=1.1 \
           --release=1.1 \
           --variant=core \
-          --source=https://kojipkgs.fedoraproject.org/compose/36/latest-Fedora-36/compose/Everything/aarch64/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/aarch64/os/ \
           --source=https://repo.tauos.co/releases/1.1/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
@@ -238,36 +238,42 @@ jobs:
           path: core-aarch64/images/boot.iso
   publish:
     if: ${{ always() }}
-    needs: [build-core-aarch64, build-home-aarch64, build-core-x86_64, build-home-x86_64]
+    needs:
+      [
+        build-core-aarch64,
+        build-home-aarch64,
+        build-core-x86_64,
+        build-home-x86_64,
+      ]
     runs-on: ubuntu-latest
     container:
       image: fedora:37
       options: --privileged
     steps:
-    - uses: actions/checkout@v3
-    - name: Download Artifacts
-      uses: actions/download-artifact@v3.0.0
-    - name: Prepare for Upload
-      run: |
-        mkdir images
-        mv *.iso images
-        mv images/home-x86_64.iso/boot.iso home-x86_64.iso
-        mv images/core-x86_64.iso/boot.iso core-x86_64.iso
-        mv images/home-aarch64.iso/boot.iso home-aarch64.iso
-        mv images/core-aarch64.iso/boot.iso core-aarch64.iso
-    - name: Create Draft Release
-      uses: ncipollo/release-action@v1.10.0
-      with:
-        name: "tauOS Latest ISO - ${{ github.run_id }}"
-        artifacts: "*.iso"
-        artifactErrorsFailBuild: true
-        tag: ${{ github.run_id }}
-        commit: main
-        draft: true
-    - name: Publish Draft Release
-      uses: ncipollo/release-action@v1.10.0
-      with:
-        tag: ${{ github.run_id }}
-        draft: false
-        allowUpdates: true
-        omitNameDuringUpdate: true
+      - uses: actions/checkout@v3
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3.0.0
+      - name: Prepare for Upload
+        run: |
+          mkdir images
+          mv *.iso images
+          mv images/home-x86_64.iso/boot.iso home-x86_64.iso
+          mv images/core-x86_64.iso/boot.iso core-x86_64.iso
+          mv images/home-aarch64.iso/boot.iso home-aarch64.iso
+          mv images/core-aarch64.iso/boot.iso core-aarch64.iso
+      - name: Create Draft Release
+        uses: ncipollo/release-action@v1.10.0
+        with:
+          name: "tauOS Latest ISO - ${{ github.run_id }}"
+          artifacts: "*.iso"
+          artifactErrorsFailBuild: true
+          tag: ${{ github.run_id }}
+          commit: main
+          draft: true
+      - name: Publish Draft Release
+        uses: ncipollo/release-action@v1.10.0
+        with:
+          tag: ${{ github.run_id }}
+          draft: false
+          allowUpdates: true
+          omitNameDuringUpdate: true
