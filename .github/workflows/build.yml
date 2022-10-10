@@ -56,7 +56,7 @@ jobs:
           --add-template-var=ostree_update_ref=tau/home/1/x86_64 \
           --add-template-var=flatpak_remote_name=flathub \
           --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --add-template-var=flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
+          --add-template-var=flatpak_remote_refs=org.gnome.Calendar,io.github.lainsce.Notejot \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
@@ -170,7 +170,7 @@ jobs:
           --add-template-var=ostree_update_ref=tau/home/1/aarch64 \
           --add-template-var=flatpak_remote_name=flathub \
           --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --add-template-var=flatpak-remote-refs=org.gnome.Calendar,io.github.lainsce.Notejot \
+          --add-template-var=flatpak_remote_refs=org.gnome.Calendar,io.github.lainsce.Notejot \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
