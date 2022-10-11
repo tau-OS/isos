@@ -41,6 +41,7 @@ jobs:
           --installpkgs=tau-helium \
           --installpkgs=tau-hydrogen \
           --installpkgs=tau-manrope-fonts \
+          --installpkgs=flatpak \
           --volid=tauOS-Home-Installer \
           --nomacboot \
           --skip-branding \
@@ -155,6 +156,7 @@ jobs:
           --installpkgs=tau-helium \
           --installpkgs=tau-hydrogen \
           --installpkgs=tau-manrope-fonts \
+          --installpkgs=flatpak \
           --volid=tauOS-Home-Installer \
           --nomacboot \
           --skip-branding \
