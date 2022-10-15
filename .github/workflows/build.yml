@@ -59,7 +59,7 @@ jobs:
           --add-template-var=ostree_update_ref=tau/home/1/${{matrix.arch}} \
           --add-template-var=flatpak_remote_name=flathub \
           --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --add-template-var=flatpak_remote_refs="runtime/org.gnome.Platform/${{matrix.arch}}/43 runtime/org.gnome.Platform/${{matrix.arch}}/42 app/org.gnome.Calendar/${{matrix.arch}}/stable app/io.github.lainsce.Notejot/${{matrix.arch}}/stable" \
+          --add-template-var=flatpak_remote_refs="runtime/org.gnome.Platform/${{matrix.arch}}/43 runtime/org.gnome.Platform/${{matrix.arch}}/42 app/org.gnome.Calendar/${{matrix.arch}}/stable app/io.github.lainsce.Notejot/${{matrix.arch}}/stable app/org.gnome.baobab/${{matrix.arch}}/stable app/org.gnome.Characters/${{matrix.arch}}/stable app/org.gnome.clocks/${{matrix.arch}}/stable app/org.gnome.Contacts/${{matrix.arch}}/stable app/org.gnome.font-viewer/${{matrix.arch}}/stable app/org.gnome.Maps/${{matrix.arch}}/stable app/org.gnome.Photos/${{matrix.arch}}/stable app/org.gnome.Weather/${{matrix.arch}}/stable app/org.gnome.Cheese/${{matrix.arch}}/stable" \
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
