@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
-    runs-on: ${{ matrix.arch == "aarch64" && "ARM64" || "ubuntu-latest" }}
+    runs-on: ${{ matrix.arch == 'aarch64' && 'ARM64' || 'ubuntu-latest' }}
     container:
       image: fedora:37
       options: --privileged
@@ -73,7 +73,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
-    runs-on: ${{ matrix.arch == "aarch64" && "ARM64" || "ubuntu-latest" }}
+    runs-on: ${{ matrix.arch == 'aarch64' && 'ARM64' || 'ubuntu-latest' }}
     container:
       image: fedora:37
       options: --privileged
