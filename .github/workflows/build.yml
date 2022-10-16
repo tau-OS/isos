@@ -19,13 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
+        id: cache
         with:
           path: repo
           key: home-${{matrix.arch}}
-      - run: ls repo
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools flatpak dbus dbus-daemon
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/${{matrix.arch}}
+        if: steps.cache.outputs.cache-hit != 'true'
+      - run: ostree remote add --no-gpg-verify --force --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/${{matrix.arch}}
       - run: ostree pull --repo repo --mirror tauOS tau/home/1/${{matrix.arch}}
       - run: |
           lorax --product=tauOS \
@@ -81,12 +82,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
+        id: cache
         with:
           path: repo
           key: core-${{matrix.arch}}
       - run: dnf install -y lorax wget rpm-ostree git hfsplus-tools
       - run: ostree init --repo repo --mode archive
-      - run: ostree remote add --no-gpg-verify --if-not-exists --repo repo tauOS https://repo.tauos.co/ostree tau/core/1/${{matrix.arch}}
+        if: steps.cache.outputs.cache-hit != 'true'
+      - run: ostree remote add --no-gpg-verify --force --repo repo tauOS https://repo.tauos.co/ostree tau/core/1/${{matrix.arch}}
       - run: ostree pull --repo repo --mirror tauOS tau/core/1/${{matrix.arch}}
       - run: |
           lorax --product=tauOS \
