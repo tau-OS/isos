@@ -27,62 +27,62 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
       - run: ostree remote add --no-gpg-verify --force --repo repo tauOS https://repo.tauos.co/ostree tau/home/1/${{matrix.arch}}
       - run: ostree pull --repo repo --mirror tauOS tau/home/1/${{matrix.arch}}
-      - name: Prepare environment for lorax run
-        run: |
-          # We have to pre-create loop devices because they are not namespaced in kernel so
-          # podman can't access newly created ones. That caused failures of tests when runners
-          # were rebooted.
-          sudo mknod -m 0660 /dev/loop0 b 7 0  2> /dev/null || true
-          sudo mknod -m 0660 /dev/loop1 b 7 1  2> /dev/null || true
-      - run: |
-          lorax --product=tauOS \
-          --version=1 \
-          --release=1 \
-          --variant=desktop \
-          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
-          --source=https://repos.fyralabs.com/tau1/ \
-          --source=https://repos.fyralabs.com/terra37/ \
-          --installpkgs=tau-logos \
-          --installpkgs=tau-release \
-          --installpkgs=tau-release-desktop \
-          --installpkgs=tau-repos \
-          --installpkgs=tau-gpg-keys \
-          --installpkgs=fedora-repos \
-          --installpkgs=tau-anaconda-profiles \
-          --installpkgs=tau-plymouth \
-          --installpkgs=tau-helium \
-          --installpkgs=tau-hydrogen \
-          --installpkgs=tau-manrope-fonts \
-          --volid=tauOS-Home-Installer \
-          --nomacboot \
-          --skip-branding \
-          --add-template=$(pwd)/lorax-configure-repo.tmpl \
-          --add-template=$(pwd)/lorax-embed-repo.tmpl \
-          --add-template=$(pwd)/lorax-embed-flatpaks.tmpl \
-          --add-template-var=ostree_install_repo=file://$(pwd)/repo \
-          --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_osname=tauOS \
-          --add-template-var=ostree_oskey=tauOS-home \
-          --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
-          --add-template-var=ostree_install_ref=tau/home/1/${{matrix.arch}} \
-          --add-template-var=ostree_update_ref=tau/home/1/${{matrix.arch}} \
-          --add-template-var=flatpak_remote_name=flathub \
-          --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --add-template-var=flatpak_remote_refs="runtime/org.gnome.Platform/${{matrix.arch}}/43 runtime/org.gnome.Platform/${{matrix.arch}}/42 app/org.gnome.Calendar/${{matrix.arch}}/stable app/io.github.lainsce.Notejot/${{matrix.arch}}/stable app/org.gnome.baobab/${{matrix.arch}}/stable app/org.gnome.Characters/${{matrix.arch}}/stable app/org.gnome.clocks/${{matrix.arch}}/stable app/org.gnome.Contacts/${{matrix.arch}}/stable app/org.gnome.font-viewer/${{matrix.arch}}/stable app/org.gnome.Maps/${{matrix.arch}}/stable app/org.gnome.Photos/${{matrix.arch}}/stable app/org.gnome.Weather/${{matrix.arch}}/stable app/org.gnome.Cheese/${{matrix.arch}}/stable" \
-          --logfile=$(pwd)/lorax.log \
-          --tmp=$(pwd)/tmp \
-          --rootfs-size=8 \
-          $(pwd)/home-${{matrix.arch}}
+      # - name: Prepare environment for lorax run
+      #   run: |
+      #     # We have to pre-create loop devices because they are not namespaced in kernel so
+      #     # podman can't access newly created ones. That caused failures of tests when runners
+      #     # were rebooted.
+      #     sudo mknod -m 0660 /dev/loop0 b 7 0  2> /dev/null || true
+      #     sudo mknod -m 0660 /dev/loop1 b 7 1  2> /dev/null || true
+      # - run: |
+      #     lorax --product=tauOS \
+      #     --version=1 \
+      #     --release=1 \
+      #     --variant=desktop \
+      #     --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
+      #     --source=https://repos.fyralabs.com/tau1/ \
+      #     --source=https://repos.fyralabs.com/terra37/ \
+      #     --installpkgs=tau-logos \
+      #     --installpkgs=tau-release \
+      #     --installpkgs=tau-release-desktop \
+      #     --installpkgs=tau-repos \
+      #     --installpkgs=tau-gpg-keys \
+      #     --installpkgs=fedora-repos \
+      #     --installpkgs=tau-anaconda-profiles \
+      #     --installpkgs=tau-plymouth \
+      #     --installpkgs=tau-helium \
+      #     --installpkgs=tau-hydrogen \
+      #     --installpkgs=tau-manrope-fonts \
+      #     --volid=tauOS-Home-Installer \
+      #     --nomacboot \
+      #     --skip-branding \
+      #     --add-template=$(pwd)/lorax-configure-repo.tmpl \
+      #     --add-template=$(pwd)/lorax-embed-repo.tmpl \
+      #     --add-template=$(pwd)/lorax-embed-flatpaks.tmpl \
+      #     --add-template-var=ostree_install_repo=file://$(pwd)/repo \
+      #     --add-template-var=ostree_update_repo=https://repo.tauos.co/ostree \
+      #     --add-template-var=ostree_osname=tauOS \
+      #     --add-template-var=ostree_oskey=tauOS-home \
+      #     --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
+      #     --add-template-var=ostree_install_ref=tau/home/1/${{matrix.arch}} \
+      #     --add-template-var=ostree_update_ref=tau/home/1/${{matrix.arch}} \
+      #     --add-template-var=flatpak_remote_name=flathub \
+      #     --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
+      #     --add-template-var=flatpak_remote_refs="runtime/org.gnome.Platform/${{matrix.arch}}/43 runtime/org.gnome.Platform/${{matrix.arch}}/42 app/org.gnome.Calendar/${{matrix.arch}}/stable app/io.github.lainsce.Notejot/${{matrix.arch}}/stable app/org.gnome.baobab/${{matrix.arch}}/stable app/org.gnome.Characters/${{matrix.arch}}/stable app/org.gnome.clocks/${{matrix.arch}}/stable app/org.gnome.Contacts/${{matrix.arch}}/stable app/org.gnome.font-viewer/${{matrix.arch}}/stable app/org.gnome.Maps/${{matrix.arch}}/stable app/org.gnome.Photos/${{matrix.arch}}/stable app/org.gnome.Weather/${{matrix.arch}}/stable app/org.gnome.Cheese/${{matrix.arch}}/stable" \
+      #     --logfile=$(pwd)/lorax.log \
+      #     --tmp=$(pwd)/tmp \
+      #     --rootfs-size=8 \
+      #     $(pwd)/home-${{matrix.arch}}
       - name: Clean up after lorax
         if: always()
         run: |
           sudo losetup -d /dev/loop0 2> /dev/null || true
           sudo losetup -d /dev/loop1 2> /dev/null || true
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: home-${{matrix.arch}}
-          path: home-${{matrix.arch}}/images/boot.iso
+      # - name: Upload Artifacts
+      #   uses: actions/upload-artifact@v3.0.0
+      #   with:
+      #     name: home-${{matrix.arch}}
+      #     path: home-${{matrix.arch}}/images/boot.iso
   build-core:
     strategy:
       matrix:
@@ -150,11 +150,7 @@ jobs:
           name: core-${{matrix.arch}}
           path: core-${{matrix.arch}}/images/boot.iso
   publish:
-    needs:
-      [
-        build-core,
-        build-home,
-      ]
+    needs: [build-core, build-home]
     runs-on: ubuntu-latest
     container:
       image: fedora:37
