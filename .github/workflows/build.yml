@@ -40,7 +40,8 @@ jobs:
           --release=1 \
           --variant=desktop \
           --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
-          --source=https://repo.tauos.co/releases/1/ \
+          --source=https://repos.fyralabs.com/tau1/ \
+          --source=https://repos.fyralabs.com/terra37/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
@@ -107,7 +108,8 @@ jobs:
           --release=1 \
           --variant=core \
           --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
-          --source=https://repo.tauos.co/releases/1/ \
+          --source=https://repos.fyralabs.com/tau1/ \
+          --source=https://repos.fyralabs.com/terra37/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
