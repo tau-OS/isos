@@ -102,6 +102,13 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
       - run: ostree remote add --no-gpg-verify --force --repo repo tauOS https://repo.tauos.co/ostree tau/core/1/${{matrix.arch}}
       - run: ostree pull --repo repo --mirror tauOS tau/core/1/${{matrix.arch}}
+      - name: Prepare environment for lorax run
+        run: |
+          # We have to pre-create loop devices because they are not namespaced in kernel so
+          # podman can't access newly created ones. That caused failures of tests when runners
+          # were rebooted.
+          sudo mknod -m 0660 /dev/loop0 b 7 0  2> /dev/null || true
+          sudo mknod -m 0660 /dev/loop1 b 7 1  2> /dev/null || true
       - run: |
           lorax --product=tauOS \
           --version=1 \
