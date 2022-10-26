@@ -82,7 +82,7 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: home-${{matrix.arch}}
-      #     path: home-${{matrix.arch}}/images/boot.iso
+          path: home-${{matrix.arch}}/images/boot.iso
   build-core:
     strategy:
       matrix:
