@@ -149,35 +149,3 @@ jobs:
         with:
           name: core-${{matrix.arch}}
           path: core-${{matrix.arch}}/images/boot.iso
-  publish:
-    needs: [build-core, build-home]
-    runs-on: ubuntu-latest
-    container:
-      image: fedora:37
-      options: --privileged
-    steps:
-      - uses: actions/checkout@v3
-      - name: Download Artifacts
-        uses: actions/download-artifact@v3.0.0
-      - name: Prepare for Upload
-        run: |
-          mv home-x86_64/boot.iso home-x86_64.iso
-          mv core-x86_64/boot.iso core-x86_64.iso
-          mv home-aarch64/boot.iso home-aarch64.iso
-          mv core-aarch64/boot.iso core-aarch64.iso
-      - name: Create Draft Release
-        uses: ncipollo/release-action@v1.10.0
-        with:
-          name: "tauOS Latest ISO - ${{ github.run_id }}"
-          artifacts: "*.iso"
-          artifactErrorsFailBuild: true
-          tag: ${{ github.run_id }}
-          commit: main
-          draft: true
-      - name: Publish Draft Release
-        uses: ncipollo/release-action@v1.10.0
-        with:
-          tag: ${{ github.run_id }}
-          draft: false
-          allowUpdates: true
-          omitNameDuringUpdate: true
