@@ -2,9 +2,7 @@
 
 This repository holds the scripts and templates required to build ISOs for the current version of tauOS, currently version 1.
 
-## Downloads
-
-### Notices
+## Notices
 
 > **Warning**
 > tauOS is currently in development, expect issues and many missing features. However, if you come across any bug or require assistance, please create a GitHub issue, or [join our Discord](https://discord.gg/5fdPuxTg5Q). We don't bite ;)
@@ -15,6 +13,8 @@ This repository holds the scripts and templates required to build ISOs for the c
 
 > **Note**
 > If you have an ARM based CPU, please download the aarch64 edition of tauOS. Otherwise, you will most likely want the x86_64 variant, which works on Intel and AMD based CPUs. Please note we do not support 32bit architectures, and you will not be able to boot an ISO which isn't built for your computer's architecture.
+
+## Downloads
 
 ### Home
 
