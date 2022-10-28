@@ -101,7 +101,7 @@ jobs:
           --source=https://repos.fyralabs.com/terra37/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
-          --installpkgs=tau-release-desktop \
+          --installpkgs=tau-release-core \
           --installpkgs=tau-repos \
           --installpkgs=tau-gpg-keys \
           --installpkgs=fedora-repos \
