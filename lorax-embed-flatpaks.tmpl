@@ -1,11 +1,11 @@
 ## Lorax template to embed Flatpaks into the installer.iso
-
+ 
 ## Args:
 ##  - root                - the root directory of the iso tree
 ##  - flatpak_remote_name - the name for the flaptak remote to fetch from
 ##  - flatpak_remote_url  - the url for the remote
 ##  - flatpak_remote_refs - refs to fetch from the remote (whitespace separated)
-
+ 
 <%page args="root, flatpak_remote_name, flatpak_remote_url, flatpak_remote_refs"/>
 <%
 import os
@@ -13,10 +13,10 @@ import re
 import tempfile
 from pylorax.executils import runcmd_output, setenv
 from pylorax.sysutils import joinpaths
-
+ 
 dest_repo=joinpaths(root, "flatpak/repo")
 refs=re.split(r"\s+", flatpak_remote_refs)
-
+ 
 # the temporary Flatpak directory is a sibling of the install tree
 flatpak_dir=joinpaths(os.path.dirname(root), "flatpak")
 setenv("FLATPAK_USER_DIR", flatpak_dir)
@@ -25,7 +25,7 @@ flatpak_repo=joinpaths(flatpak_dir, "repo")
 triggers_dir = tempfile.mkdtemp(prefix='flatpak-triggers-')
 setenv("FLATPAK_TRIGGERSDIR", triggers_dir)
 %>
-
+ 
 runcmd flatpak config --user --set languages "*"
 runcmd flatpak remote-add --user ${flatpak_remote_name} ${flatpak_remote_url}
 %if len(refs) > 0:
