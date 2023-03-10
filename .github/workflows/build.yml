@@ -59,9 +59,9 @@ jobs:
           --add-template-var=ostree_contenturl=https://repo.tauos.co/ostree \
           --add-template-var=ostree_install_ref=tau/home/1/${{matrix.arch}} \
           --add-template-var=ostree_update_ref=tau/home/1/${{matrix.arch}} \
-          --add-template-var=flatpak_remote_name=flathub \
-          --add-template-var=flatpak_remote_url=https://flathub.org/repo/flathub.flatpakrepo \
-          --add-template-var=flatpak_remote_refs="runtime/org.gnome.Platform/${{matrix.arch}}/43 runtime/org.gnome.Platform/${{matrix.arch}}/42 app/org.gnome.Calendar/${{matrix.arch}}/stable app/io.github.lainsce.Notejot/${{matrix.arch}}/stable app/org.gnome.baobab/${{matrix.arch}}/stable app/org.gnome.Characters/${{matrix.arch}}/stable app/org.gnome.clocks/${{matrix.arch}}/stable app/org.gnome.Contacts/${{matrix.arch}}/stable app/org.gnome.font-viewer/${{matrix.arch}}/stable app/org.gnome.Maps/${{matrix.arch}}/stable app/org.gnome.Photos/${{matrix.arch}}/stable app/org.gnome.Weather/${{matrix.arch}}/stable app/org.gnome.Cheese/${{matrix.arch}}/stable" \
+          --add-template-var=flatpak_remote_name=catalogue \
+          --add-template-var=flatpak_remote_url=https://repo.tauos.co/catalogue.flatpakrepo \
+          --add-template-var=flatpak_remote_refs="runtime/com.fyralabs.Platform/${{matrix.arch}} runtime/co.tauos.Platform/${{matrix.arch}} app/com.fyralabs.Victrola/${{matrix.arch}}/0.1 app/com.fyralabs.Nixie/${{matrix.arch}}/0.1.0 app/com.fyralabs.Modi/${{matrix.arch}}/0.1.0 app/com.fyralabs.Kairos/${{matrix.arch}}/0.1.0 app/com.fyralabs.Enigma/${{matrix.arch}}/0.1.0 app/co.tauos.Abacus/${{matrix.arch}} app/com.fyralabs.Accelerator/${{matrix.arch}}/0.13.0 app/co.tauos.Buds/${{matrix.arch}}/0.1.0 \ 
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
