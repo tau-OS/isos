@@ -96,7 +96,7 @@ jobs:
           --version=1 \
           --release=1 \
           --variant=core \
-          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/" \
           --source=https://repos.fyralabs.com/tau1/ \
           --source=https://repos.fyralabs.com/terra37/ \
           --installpkgs=tau-logos \
