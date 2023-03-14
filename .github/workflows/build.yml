@@ -64,7 +64,7 @@ jobs:
           --add-template-var=flatpak_remote_refs="runtime/com.fyralabs.Platform/${{matrix.arch}}/stable runtime/co.tauos.Platform/${{matrix.arch}}/stable app/com.fyralabs.Victrola/${{matrix.arch}}/master app/com.fyralabs.Nixie/${{matrix.arch}}/master app/com.fyralabs.Modi/${{matrix.arch}}/master app/com.fyralabs.Kairos/${{matrix.arch}}/master app/com.fyralabs.Enigma/${{matrix.arch}}/master app/co.tauos.Abacus/${{matrix.arch}}/master app/com.fyralabs.Accelerator/${{matrix.arch}}/master app/co.tauos.Buds/${{matrix.arch}}/master" \ 
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
-          --rootfs-size=10 \
+          --rootfs-size=16 \
           $(pwd)/home-${{matrix.arch}}
       - run: mv home-${{matrix.arch}}/images/boot.iso home-${{matrix.arch}}-${{github.event.repository.pushed_at}}.iso
       - name: Upload Artifacts
