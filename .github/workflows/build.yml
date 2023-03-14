@@ -66,12 +66,12 @@ jobs:
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
           $(pwd)/home-${{matrix.arch}}
-      - run: mv home-${{matrix.arch}}/images/boot.iso home-${{matrix.arch}}.iso
+      - run: mv home-${{matrix.arch}}/images/boot.iso home-${{matrix.arch}}-${{github.event.repository.updated_at}}.iso
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: home-${{matrix.arch}}
-          path: home-${{matrix.arch}}.iso
+          name: home-${{matrix.arch}}-${{github.event.repository.updated_at}}
+          path: home-${{matrix.arch}}-${{github.event.repository.updated_at}}.iso
   build-core:
     strategy:
       matrix:
@@ -126,9 +126,9 @@ jobs:
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
           $(pwd)/core-${{matrix.arch}}
-      - run: mv core-${{matrix.arch}}/images/boot.iso core-${{matrix.arch}}.iso
+      - run: mv core-${{matrix.arch}}/images/boot.iso core-${{matrix.arch}}-${{github.event.repository.updated_at}}.iso
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: core-${{matrix.arch}}
-          path: core-${{matrix.arch}}.iso
+          name: core-${{matrix.arch}}-${{github.event.repository.updated_at}}
+          path: core-${{matrix.arch}}-${{github.event.repository.updated_at}}.iso
