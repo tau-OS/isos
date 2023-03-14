@@ -61,7 +61,7 @@ jobs:
           --add-template-var=ostree_update_ref=tau/home/1/${{matrix.arch}} \
           --add-template-var=flatpak_remote_name=catalogue \
           --add-template-var=flatpak_remote_url=https://repo.tauos.co/catalogue.flatpakrepo \
-          --add-template-var=flatpak_remote_refs="runtime/com.fyralabs.Platform/${{matrix.arch}} runtime/co.tauos.Platform/${{matrix.arch}} app/com.fyralabs.Victrola/${{matrix.arch}}/0.1 app/com.fyralabs.Nixie/${{matrix.arch}}/0.1.0 app/com.fyralabs.Modi/${{matrix.arch}}/0.1.0 app/com.fyralabs.Kairos/${{matrix.arch}}/0.1.0 app/com.fyralabs.Enigma/${{matrix.arch}}/0.1.0 app/co.tauos.Abacus/${{matrix.arch}} app/com.fyralabs.Accelerator/${{matrix.arch}}/0.13.0 app/co.tauos.Buds/${{matrix.arch}}/0.1.0 \ 
+          --add-template-var=flatpak_remote_refs="runtime/com.fyralabs.Platform/${{matrix.arch}} runtime/co.tauos.Platform/${{matrix.arch}} app/com.fyralabs.Victrola/${{matrix.arch}}/0.1 app/com.fyralabs.Nixie/${{matrix.arch}}/0.1.0 app/com.fyralabs.Modi/${{matrix.arch}}/0.1.0 app/com.fyralabs.Kairos/${{matrix.arch}}/0.1.0 app/com.fyralabs.Enigma/${{matrix.arch}}/0.1.0 app/co.tauos.Abacus/${{matrix.arch}} app/com.fyralabs.Accelerator/${{matrix.arch}}/0.13.0 app/co.tauos.Buds/${{matrix.arch}}/0.1.0" \ 
           --logfile=$(pwd)/lorax.log \
           --tmp=$(pwd)/tmp \
           --rootfs-size=8 \
@@ -96,7 +96,7 @@ jobs:
           --version=1 \
           --release=1 \
           --variant=core \
-          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/" \
+          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
           --source=https://repos.fyralabs.com/tau1/ \
           --source=https://repos.fyralabs.com/terra37/ \
           --installpkgs=tau-logos \
