@@ -33,9 +33,9 @@ jobs:
           --release=1 \
           --variant=desktop \
           --rootfs-size=8 \
-          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/39/latest-Fedora-39/compose/Everything/${{matrix.arch}}/os/ \
           --source=https://repos.fyralabs.com/tau1/ \
-          --source=https://repos.fyralabs.com/terra37/ \
+          --source=https://repos.fyralabs.com/terra39/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-desktop \
@@ -96,9 +96,9 @@ jobs:
           --version=1 \
           --release=1 \
           --variant=core \
-          --source=https://kojipkgs.fedoraproject.org/compose/37/latest-Fedora-37/compose/Everything/${{matrix.arch}}/os/ \
+          --source=https://kojipkgs.fedoraproject.org/compose/39/latest-Fedora-39/compose/Everything/${{matrix.arch}}/os/ \
           --source=https://repos.fyralabs.com/tau1/ \
-          --source=https://repos.fyralabs.com/terra37/ \
+          --source=https://repos.fyralabs.com/terra39/ \
           --installpkgs=tau-logos \
           --installpkgs=tau-release \
           --installpkgs=tau-release-core \
